@@ -1,4 +1,6 @@
-Packaged changed:
+Packaged changed
+================
+
 - SickBeard (Fork with failed download support) (thanks to Tolstyak)
     - Added Dutch show support
     - Added Snatched color mod (thanks to Amelandbor)

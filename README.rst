@@ -1,4 +1,4 @@
-Packaged changed
+Packages changed
 ================
 
 - SickBeard (Fork with failed download support) (thanks to Tolstyak)

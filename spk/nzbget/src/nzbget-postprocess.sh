@@ -164,6 +164,11 @@ if [ "$NZBPP_PARSTATUS" -eq 1 -o "$NZBPP_PARSTATUS" -eq 3 -o "$NZBPP_PARFAILED" 
 		echo "[WARNING] Post-Process: Par-check successful, but Par-repair disabled, exiting"
 	else
 		echo "[WARNING] Post-Process: Par-check failed, exiting"
+		if [ "$SickBeard" = "yes" -a "$NZBPP_CATEGORY" = "$SickBeardCategory" -a -e "$SabToSickBeard" ]; then
+    			# Call SickBeard's postprocessing script
+    			echo "[INFO] Post-Process: Running SickBeard's postprocessing script to notify it of a failed download"
+    			$PythonCmd $SabToSickBeard "$NZBPP_DIRECTORY" "$NZBPP_NZBFILENAME" "" "" "" "" "1" >/dev/null 2>&1
+		fi
 	fi
 	exit $POSTPROCESS_ERROR
 fi 
@@ -319,6 +324,12 @@ if [ "$SickBeard" = "yes" -a "$NZBPP_CATEGORY" = "$SickBeardCategory" -a -e "$Sa
 	# Call SickBeard's postprocessing script
 	echo "[INFO] Post-Process: Running SickBeard's postprocessing script"
 	$PythonCmd $SabToSickBeard "$NZBPP_DIRECTORY" "$NZBPP_NZBFILENAME" >/dev/null 2>&1
+fi
+
+if [ "$CouchPotato" = "yes" -a "$NZBPP_CATEGORY" = "$CouchPotatoCategory" -a -e "$nzbToCouchPotato" ]; then
+	# Call CouchPotato's postprocessing script
+	echo "[INFO] Post-Process: Running CouchPotato's postprocessing script"
+	$PythonCmd $nzbToCouchPotato "$NZBPP_DIRECTORY" "$NZBPP_NZBFILENAME" >/dev/null 2>&1
 fi
 
 # Check if destination directory was set in postprocessing parameters

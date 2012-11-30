@@ -1,6 +1,6 @@
 SPK_NAME = nzbget
 SPK_VERS = 9.0~r518
-SPK_REV = 99
+SPK_REV = 99-TEST
 SPK_ICON = src/nzbget.png
 DSM_UI_DIR = app
 CHANGELOG = "1. Added CouchPotato support\\\n2. Optimized for SickBeard Failed download"

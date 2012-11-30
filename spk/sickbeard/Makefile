@@ -1,6 +1,6 @@
 SPK_NAME = sickbeard
 SPK_VERS = $(shell date +%Y%m%d)
-SPK_REV = 99
+SPK_REV = 99-TEST
 SPK_ICON = src/sickbeard.png
 DSM_UI_DIR = app
 CHANGELOG = "1. Optimized for Failed download handling\\\n2. Support for Dutch shows"

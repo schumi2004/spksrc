@@ -1,6 +1,6 @@
 SPK_NAME = couchpotatoserver
 SPK_VERS = $(shell date +%Y%m%d)
-SPK_REV = 99
+SPK_REV = 99-TEST
 SPK_ICON = src/couchpotatoserver.png
 DSM_UI_DIR = app
 CHANGELOG = "1. Changed to Development version\\\n2. Added nzbToCouchPotato and sabToCouchPotato"

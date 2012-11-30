@@ -1,6 +1,6 @@
 SPK_NAME = sabnzbd
 SPK_VERS = 0.7.6
-SPK_REV = 99
+SPK_REV = 99-TEST
 SPK_ICON = src/sabnzbd.png
 DSM_UI_DIR = app
 CHANGELOG = "1. Optimized config for Failed download handling"

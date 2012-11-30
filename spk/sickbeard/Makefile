@@ -1,13 +1,15 @@
 SPK_NAME = sickbeard
 SPK_VERS = $(shell date +%Y%m%d)
-SPK_REV = 4
+SPK_REV = 99
 SPK_ICON = src/sickbeard.png
 DSM_UI_DIR = app
+CHANGELOG = "1. Optimized for Failed download handling\\\n2. Support for Dutch shows"
+BETA = 1
 
 DEPENDS  =
 SPK_DEPENDS = "python>2.7.3-2"
 
-MAINTAINER = SynoCommunity
+MAINTAINER = schumi2004
 DESCRIPTION = SickBeard is a PVR for newsgroup users \(with limited torrent support\). It watches for new episodes of your favorite shows and when they are posted it downloads them, sorts and renames them automatically. New episodes can also be indexed for your DiskStation.
 DESCRIPTION_FRE = L\\\'application ultime pour télécharger et gérer vos séries TV via NZB ou torrent. Il surveille la sortie de nouveaux épisodes et les télécharge, classe, renomme automatiquement. Les nouveaux épisodes peuvent être indexés pour votre DiskStation.
 DESCRIPTION_SPN = SickBeard es una aplicación para descargar series de televisión de manera automática. Busca por nuevos episodios de tus series favoritas y cuando estos están disponibles los descarga, ordena y renombra. Los nuevos episodios puedes ser indexados en tu DiskStation.
@@ -46,7 +48,7 @@ sickbeard_extra_install: $(STAGING_DIR)/share/SickBeard
 
 $(STAGING_DIR)/share/SickBeard:
 	install -m 755 -d $(STAGING_DIR)/share
-	cd $(STAGING_DIR)/share && git clone https://github.com/midgetspy/Sick-Beard.git SickBeard
+	cd $(STAGING_DIR)/share && git clone -b dutch https://github.com/schumi2004/Sick-Beard.git SickBeard
 	rm -fr $(STAGING_DIR)/share/SickBeard/.git $(STAGING_DIR)/share/SickBeard/.gitignore
 	chmod 777 $(STAGING_DIR)/share/SickBeard/autoProcessTV
 	install -m 600 $(STAGING_DIR)/share/SickBeard/autoProcessTV/autoProcessTV.cfg.sample $(STAGING_DIR)/share/SickBeard/autoProcessTV/autoProcessTV.cfg

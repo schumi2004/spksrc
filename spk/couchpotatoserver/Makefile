@@ -3,6 +3,8 @@ SPK_VERS = $(shell date +%Y%m%d)
 SPK_REV = 99
 SPK_ICON = src/couchpotatoserver.png
 DSM_UI_DIR = app
+CHANGELOG = "1. Changed to Development version\\\n2. Added nzbToCouchPotato and sabToCouchPotato"
+BETA = 1
 
 DEPENDS  = 
 SPK_DEPENDS = "python>2.7.3-2"
@@ -14,8 +16,6 @@ DESCRIPTION_SPN = CouchPotato Server es la nueva version de CouchPotato. CouchPo
 ADMIN_PORT = 5050
 RELOAD_UI = yes
 DISPLAY_NAME = CouchPotato Server
-
-CHANGELOG = "1. Changed to Development version\\\n2. Added nzbToCouchPotato and sabToCouchPotato"
 
 HOMEPAGE   = http://couchpota.to/
 LICENSE    = GPL

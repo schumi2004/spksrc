@@ -1,16 +1,17 @@
 SPK_NAME = sabnzbd
 SPK_VERS = 0.7.6
-SPK_REV = 3
+SPK_REV = 99
 SPK_ICON = src/sabnzbd.png
 DSM_UI_DIR = app
-CHANGELOG = "1. Update to 0.7.6\\\n2. Improve user management\\\n3. Update to new Python"
+CHANGELOG = "1. Optimized config for Failed download handling"
+BETA = 1
 
 DEPENDS  = cross/busybox cross/par2cmdline cross/unrar cross/$(SPK_NAME)
 
 SPK_DEPENDS = "python>2.7.3-2"
 
-MAINTAINER = SynoCommunity
-DESCRIPTION = SABnzbd makes Usenet as simple and streamlined as possible by automating everything we can. All you have to do is add an .nzb. SABnzbd takes over from there, where it will be automatically downloaded, verified, repaired, extracted and filed away with zero human interaction.
+MAINTAINER = schumi2004
+DESCRIPTION = SABnzbd (TEST VERSION) makes Usenet as simple and streamlined as possible by automating everything we can. All you have to do is add an .nzb. SABnzbd takes over from there, where it will be automatically downloaded, verified, repaired, extracted and filed away with zero human interaction.
 DESCRIPTION_FRE = SABnzbd rend Usenet aussi simple et automatisé que possible. Vous n\\\'avez qu\\\'a ajouter un .nzb, SABnzbd s\\\'occupera du reste sans aucune intervention de votre part : téléchargement, vérification, réparation, extraction et déplacement.
 DESCRIPTION_SPN = SABnzbd hace que Usenet sea lo más simple posible, automatizando todo lo que se puede. Todo lo que tienes que hacer es agregar un archivo .nzb. SABnzbd empieza desde ahí. Tus archivos serán automáticamente descargados, verificados, reparados, descomprimidos y archivados.
 ADMIN_PORT = 8080

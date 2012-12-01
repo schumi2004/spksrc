@@ -1,3 +1,23 @@
+Packages changed
+================
+
+- SickBeard (Fork with failed download support) (thanks to Tolstyak)
+    - Added Dutch show support
+    - Added Snatched color mod (thanks to Amelandbor)
+    - Changed settings for proper failed download handling
+
+- CouchPotato Server
+    - Added scripts nzbToCouchPotato/sabToCouchPotato for use in NZBget or SABnzbd (read readme in folder autoProcessMovie) (thanks to thorli)
+
+- SABnzbd
+    - Changed settings for proper failed download handling
+
+- NZBget
+    - Added CouchPotato post processing support
+    - Added TEST fix to properly handle par2-sets that were renamed after creation by the poster (thanks to hugbug)
+    - Changed settings for proper failed download handling with SickBeard (thanks to Tolstyak)
+
+
 spksrc
 ======
 spksrc is a cross compilation framework intended to compile and package softwares for Synology NAS

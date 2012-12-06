@@ -169,6 +169,11 @@ if [ "$NZBPP_PARSTATUS" -eq 1 -o "$NZBPP_PARSTATUS" -eq 3 -o "$NZBPP_PARFAILED" 
     			echo "[INFO] Post-Process: Running SickBeard's postprocessing script to notify it of a failed download"
     			$PythonCmd $SabToSickBeard "$NZBPP_DIRECTORY" "$NZBPP_NZBFILENAME" "" "" "" "" "1" >/dev/null 2>&1
 		fi
+		if [ "$CouchPotato" = "yes" -a "$NZBPP_CATEGORY" = "$CouchPotatoCategory" -a -e "$nzbToCouchPotato" ]; then
+			# Call CouchPotato's postprocessing script
+			echo "[INFO] Post-Process: Running CouchPotato's postprocessing script to notify it of a failed download"
+			$PythonCmd $nzbToCouchPotato "$NZBPP_DIRECTORY" "$NZBPP_NZBFILENAME" "" "" "" "" "1">/dev/null 2>&1
+		fi
 	fi
 	exit $POSTPROCESS_ERROR
 fi 
@@ -291,6 +296,26 @@ rm *.nzb >/dev/null 2>&1
 rm *.sfv >/dev/null 2>&1
 rm *.1 >/dev/null 2>&1
 rm _brokenlog.txt >/dev/null 2>&1
+# Custom clean up list (uncomment to enable)
+#rm *.nfo >/dev/null 2>&1
+#rm *.srr >/dev/null 2>&1
+#rm *.srs >/dev/null 2>&1
+#rm *.tbn >/dev/null 2>&1
+#rm *.html >/dev/null 2>&1
+#rm *.bat >/dev/null 2>&1
+#rm *.htm >/dev/null 2>&1
+#rm *.txt >/dev/null 2>&1
+#rm *.png >/dev/null 2>&1
+#rm *.exe >/dev/null 2>&1
+#rm *.jpg >/dev/null 2>&1
+#rm *.par2 >/dev/null 2>&1
+#rm *.sample >/dev/null 2>&1
+#rm *.srs >/dev/null 2>&1
+#rm *.url >/dev/null 2>&1
+#rm *.idx >/dev/null 2>&1
+#rm *.sub >/dev/null 2>&1
+#rm *.info >/dev/null 2>&1
+#rm *.md5 >/dev/null 2>&1
 if [ "$Unrared" -eq 1 ]; then
 	# Delete par2-file only if there were files for unpacking.
 	rm *.[pP][aA][rR]2 >/dev/null 2>&1
@@ -323,13 +348,13 @@ fi
 if [ "$SickBeard" = "yes" -a "$NZBPP_CATEGORY" = "$SickBeardCategory" -a -e "$SabToSickBeard" ]; then
 	# Call SickBeard's postprocessing script
 	echo "[INFO] Post-Process: Running SickBeard's postprocessing script"
-	$PythonCmd $SabToSickBeard "$NZBPP_DIRECTORY" "$NZBPP_NZBFILENAME" >/dev/null 2>&1
+	$PythonCmd $SabToSickBeard "$NZBPP_DIRECTORY" "$NZBPP_NZBFILENAME" "" "" "" "" "0">/dev/null 2>&1
 fi
 
 if [ "$CouchPotato" = "yes" -a "$NZBPP_CATEGORY" = "$CouchPotatoCategory" -a -e "$nzbToCouchPotato" ]; then
 	# Call CouchPotato's postprocessing script
 	echo "[INFO] Post-Process: Running CouchPotato's postprocessing script"
-	$PythonCmd $nzbToCouchPotato "$NZBPP_DIRECTORY" "$NZBPP_NZBFILENAME" >/dev/null 2>&1
+	$PythonCmd $nzbToCouchPotato "$NZBPP_DIRECTORY" "$NZBPP_NZBFILENAME" "" "" "" "" "0">/dev/null 2>&1
 fi
 
 # Check if destination directory was set in postprocessing parameters

@@ -1,4 +1,4 @@
-#!/bin/sh 
+#!/bin/sh
 #
 # This file if part of nzbget
 #

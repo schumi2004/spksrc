@@ -167,11 +167,13 @@ if [ "$NZBPP_PARSTATUS" -eq 1 -o "$NZBPP_PARSTATUS" -eq 3 -o "$NZBPP_PARFAILED" 
 		if [ "$SickBeard" = "yes" -a "$NZBPP_CATEGORY" = "$SickBeardCategory" -a -e "$SabToSickBeard" ]; then
     			# Call SickBeard's postprocessing script
     			echo "[INFO] Post-Process: Running SickBeard's postprocessing script to notify it of a failed download"
+			# For post-processing error report remove ">/dev/null 2>&1" at line below
     			$PythonCmd $SabToSickBeard "$NZBPP_DIRECTORY" "$NZBPP_NZBFILENAME" "" "" "" "" "1" >/dev/null 2>&1
 		fi
 		if [ "$CouchPotato" = "yes" -a "$NZBPP_CATEGORY" = "$CouchPotatoCategory" -a -e "$nzbToCouchPotato" ]; then
 			# Call CouchPotato's postprocessing script
 			echo "[INFO] Post-Process: Running CouchPotato's postprocessing script to notify it of a failed download"
+			# For post-processing error report remove ">/dev/null 2>&1" at line below
 			$PythonCmd $nzbToCouchPotato "$NZBPP_DIRECTORY" "$NZBPP_NZBFILENAME" "" "" "" "" "1">/dev/null 2>&1
 		fi
 	fi
@@ -348,12 +350,14 @@ fi
 if [ "$SickBeard" = "yes" -a "$NZBPP_CATEGORY" = "$SickBeardCategory" -a -e "$SabToSickBeard" ]; then
 	# Call SickBeard's postprocessing script
 	echo "[INFO] Post-Process: Running SickBeard's postprocessing script"
+	# For post-processing error report remove ">/dev/null 2>&1" at line below
 	$PythonCmd $SabToSickBeard "$NZBPP_DIRECTORY" "$NZBPP_NZBFILENAME" "" "" "" "" "0">/dev/null 2>&1
 fi
 
 if [ "$CouchPotato" = "yes" -a "$NZBPP_CATEGORY" = "$CouchPotatoCategory" -a -e "$nzbToCouchPotato" ]; then
 	# Call CouchPotato's postprocessing script
 	echo "[INFO] Post-Process: Running CouchPotato's postprocessing script"
+	# For post-processing error report remove ">/dev/null 2>&1" at line below
 	$PythonCmd $nzbToCouchPotato "$NZBPP_DIRECTORY" "$NZBPP_NZBFILENAME" "" "" "" "" "0">/dev/null 2>&1
 fi
 

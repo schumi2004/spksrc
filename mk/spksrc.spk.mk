@@ -6,11 +6,14 @@ include ../../mk/spksrc.directories.mk
 NAME = $(SPK_NAME)
 
 ifneq ($(ARCH),)
+SPK_ARCH = $(ARCH)
 ARCH_SUFFIX = -$(ARCH)
 TC = syno$(ARCH_SUFFIX)
+else
+SPK_ARCH = noarch
 endif
 
-SPK_FILE_NAME = $(PACKAGES_DIR)/$(SPK_NAME)$(ARCH_SUFFIX)-$(SPK_VERS)-$(SPK_REV).spk
+SPK_FILE_NAME = $(PACKAGES_DIR)/$(SPK_NAME)_$(SPK_ARCH)_$(SPK_VERS)-$(SPK_REV).spk
 
 #####
 
@@ -44,11 +47,7 @@ $(WORK_DIR)/INFO: Makefile $(SPK_ICON)
 	   ) \
 	) | sed 's|"\s|"\n|' >> $@
 	@echo maintainer=\"$(MAINTAINER)\" >> $@
-ifneq ($(strip $(ARCH)),)
-	@echo arch=\"$(ARCH)\" >> $@
-else
-	@echo arch=\"noarch\" >> $@
-endif
+	@echo arch=\"$(SPK_ARCH)\" >> $@
 ifneq ($(strip $(FIRMWARE)),)
 	@echo firmware=\"$(FIRMWARE)\" >> $@
 else
@@ -194,21 +193,32 @@ $(SPK_FILE_NAME): $(WORK_DIR)/package.tgz $(WORK_DIR)/INFO $(DSM_SCRIPTS) $(DSM_
 
 package: $(SPK_FILE_NAME)
 
-ifneq ($(PUBLISHING_URL),)
-ifneq ($(PUBLISHING_KEY),)
+### Publish rules
+PUBLISH_METHOD ?= REPO
+ifeq ($(strip $(PUBLISH_METHOD)),REPO)
 publish: package
-	curl -k -A "spksrc v1.0; $(PUBLISHING_KEY)" \
-	     -F "package=@$(SPK_FILE_NAME);filename=$(notdir $(SPK_FILE_NAME))" \
-	     $(PUBLISHING_URL)
-else
-publish:
-	@echo 'Set PUBLISHING_KEY to the publishing key of your Package Server'
-	@exit 1
+ifeq ($(PUBLISH_REPO_URL),)
+	$(error Set PUBLISH_REPO_URL in local.mk)
 endif
-else
-publish:
-	@echo 'Set PUBLISHING_URL to the URL of your Package Server'
-	@exit 1
+ifeq ($(PUBLISH_REPO_KEY),)
+	$(error Set PUBLISH_REPO_KEY in local.mk)
+endif
+	curl -k -A "spksrc v1.0; $(PUBLISH_REPO_KEY)" \
+	     -F "package=@$(SPK_FILE_NAME);filename=$(notdir $(SPK_FILE_NAME))" \
+	     $(PUBLISH_REPO_URL)
+endif
+ifeq ($(strip $(PUBLISH_METHOD)),FTP)
+publish: package
+ifeq ($(PUBLISH_FTP_URL),)
+	$(error Set PUBLISH_FTP_URL in local.mk)
+endif
+ifeq ($(PUBLISH_FTP_USER),)
+	$(error Set PUBLISH_FTP_USER in local.mk)
+endif
+ifeq ($(PUBLISH_FTP_PASSWORD),)
+	$(error Set PUBLISH_FTP_PASSWORD in local.mk)
+endif
+	curl -T "$(SPK_FILE_NAME)" -u $(PUBLISH_FTP_USER):$(PUBLISH_FTP_PASSWORD) $(PUBLISH_FTP_URL)/$(notdir $(SPK_FILE_NAME))
 endif
 
 

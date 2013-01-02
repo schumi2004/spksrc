@@ -1,9 +1,9 @@
 SPK_NAME = nzbget
-SPK_VERS = 9.0~r518
+SPK_VERS = 10.0~r529
 SPK_REV = 99-TEST
 SPK_ICON = src/nzbget.png
 DSM_UI_DIR = app
-CHANGELOG = "1. Added CouchPotato support\\\n2. Optimized for SickBeard Failed download"
+CHANGELOG = "1. Version 10"
 BETA = 1
 
 DEPENDS = cross/busybox cross/unrar cross/$(SPK_NAME)

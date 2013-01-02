@@ -1,8 +1,8 @@
 PKG_NAME = nzbget
-PKG_VERS = 9.0
+PKG_VERS = 10.0
 PKG_EXT = tar.gz
 PKG_DOWNLOAD_METHOD = git
-PKG_GIT_HASH = 04105da
+PKG_GIT_HASH = f12f2c3
 PKG_DIST_NAME = nzbget.git
 PKG_DIST_SITE = git://github.com/schumi2004
 PKG_DIST_FILE = $(PKG_NAME)-git$(PKG_GIT_HASH).$(PKG_EXT)

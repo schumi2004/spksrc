@@ -3,11 +3,11 @@ SPK_VERS = $(shell date +%Y%m%d)
 SPK_REV = 99-TEST
 SPK_ICON = src/couchpotatoserver.png
 DSM_UI_DIR = app
-CHANGELOG = "1. Changed to Development version\\\n2. Added nzbToCouchPotato and sabToCouchPotato"
+CHANGELOG = "1. Changed to Development version"
 BETA = 1
 
 DEPENDS  = 
-SPK_DEPENDS = "python>2.7.3-2"
+SPK_DEPENDS = "python>2.7.3-3"
 
 MAINTAINER = schumi2004
 DESCRIPTION = CouchPotato Server \\\(TEST VERSION\\\) is the new CouchPotato. It is an automatic NZB and torrent downloader for movies. You can keep a \"want to watch\"-list and it will search for NZBs/torrents of these items every X hours. Once a correct release is found, matching the correct quality, it will send it to SABnzbd/NZBGet or download the .nzb or .torrent to a specified directory. The downloaded movie can then be automatically moved and renamed to your liking as well as indexed by your DiskStation.

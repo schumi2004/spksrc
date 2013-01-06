@@ -1,13 +1,13 @@
 SPK_NAME = sickbeard
 SPK_VERS = $(shell date +%Y%m%d)
-SPK_REV = 99-TEST-NZBX
+SPK_REV = 99-TEST
 SPK_ICON = src/sickbeard.png
 DSM_UI_DIR = app
-CHANGELOG = "1. Optimized for Failed download handling\\\n2. Support for Dutch shows"
+CHANGELOG = "1. Added NZBX provider\\\n2. Optimized for Failed download handling\\\n3. Support for Dutch shows"
 BETA = 1
 
 DEPENDS  =
-SPK_DEPENDS = "python>2.7.3-2"
+SPK_DEPENDS = "python>2.7.3-3"
 
 MAINTAINER = schumi2004
 DESCRIPTION = SickBeard \\\(TEST VERSION\\\) is a PVR for newsgroup users \(with limited torrent support\). It watches for new episodes of your favorite shows and when they are posted it downloads them, sorts and renames them automatically. New episodes can also be indexed for your DiskStation.

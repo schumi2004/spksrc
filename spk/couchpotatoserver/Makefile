@@ -3,7 +3,7 @@ SPK_VERS = $(shell date +%Y%m%d)
 SPK_REV = 99-TEST
 SPK_ICON = src/couchpotatoserver.png
 DSM_UI_DIR = app
-CHANGELOG = "1. Changed to Development version"
+CHANGELOG = "1. Dutch data from TheMovieDB"
 BETA = 1
 
 DEPENDS  = 
@@ -48,5 +48,5 @@ couchpotatoserver_extra_install: $(STAGING_DIR)/share/CouchPotatoServer
 
 $(STAGING_DIR)/share/CouchPotatoServer:
 	install -m 755 -d $(STAGING_DIR)/share
-	cd $(STAGING_DIR)/share && git clone -b develop https://github.com/RuudBurger/CouchPotatoServer.git CouchPotatoServer
+	cd $(STAGING_DIR)/share && git clone -b nl-tmdb https://github.com/schumi2004/CouchPotatoServer.git CouchPotatoServer
 	rm -fr $(STAGING_DIR)/share/CouchPotatoServer/.git $(STAGING_DIR)/share/CouchPotatoServer/.gitignore

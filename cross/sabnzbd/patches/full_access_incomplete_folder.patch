@@ -1,0 +1,27 @@
+From c8c78629d01f707c29b350ba1efabbd467e43ef8 Mon Sep 17 00:00:00 2001
+From: schumi2004 <schumi2004@gmail.com>
+Date: Thu, 17 Jan 2013 21:30:35 +0100
+Subject: [PATCH] Initial commit
+
+---
+ SABnzbd.py |    4 ++--
+ 1 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git SABnzbd.py SABnzbd.py
+index 43ee3ed..8e2a5cf 100755
+--- SABnzbd.py
++++ SABnzbd.py
+@@ -282,8 +282,8 @@ def daemonize():
+     os.chdir(sabnzbd.DIR_PROG)
+     os.setsid()
+     # Make sure I can read my own files and shut out others
+-    prev= os.umask(0)
+-    os.umask(prev and int('077',8))
++    prev= os.umask(002)
++    #os.umask(prev and int('077',8))
+ 
+     try:
+         pid = os.fork()
+-- 
+1.7.1
+

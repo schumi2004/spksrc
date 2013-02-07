@@ -1,9 +1,9 @@
 SPK_NAME = nzbget
-SPK_VERS = 10.0~r534
+SPK_VERS = 10.0~r555
 SPK_REV = 99-TEST
 SPK_ICON = src/nzbget.png
 DSM_UI_DIR = app
-CHANGELOG = "1. Version 10"
+CHANGELOG = "1. Development Version 10~555"
 BETA = 1
 
 DEPENDS = cross/busybox cross/unrar cross/$(SPK_NAME)

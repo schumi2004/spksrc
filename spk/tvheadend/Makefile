@@ -1,6 +1,6 @@
 SPK_NAME = tvheadend
-SPK_VERS = 3.2.18
-SPK_REV = 4
+SPK_VERS = 3.3~git13022013
+SPK_REV = 5
 SPK_ICON = src/tvheadend.png
 DSM_UI_DIR = app
 

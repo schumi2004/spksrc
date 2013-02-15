@@ -1,9 +1,9 @@
 SPK_NAME = nzbget
-SPK_VERS = 10.0~r555
+SPK_VERS = 10.0~r567
 SPK_REV = 99-TEST
 SPK_ICON = src/nzbget.png
 DSM_UI_DIR = app
-CHANGELOG = "1. Development Version 10~555"
+CHANGELOG = "1. Development Version 10~567"
 BETA = 1
 
 DEPENDS = cross/busybox cross/unrar cross/$(SPK_NAME)
@@ -38,6 +38,22 @@ include ../../mk/spksrc.spk.mk
 nzbget_extra_install:
 	install -m 755 -d $(STAGING_DIR)/var
 	install -m 644 src/nzbget.conf $(STAGING_DIR)/var/nzbget.conf
+	install -m 755 -d $(STAGING_DIR)/var/sendEmail
+	install -m 644 src/sendEmail/CHANGELOG $(STAGING_DIR)/var/sendEmail/CHANGELOG
+	install -m 644 src/sendEmail/README $(STAGING_DIR)/var/sendEmail/README
+	install -m 644 src/sendEmail/README-BR.txt $(STAGING_DIR)/var/sendEmail/README-BR.txt
+	install -m 644 src/sendEmail/sendEmail $(STAGING_DIR)/var/sendEmail/sendEmail
+	install -m 644 src/sendEmail/sendEmail.pl $(STAGING_DIR)/var/sendEmail/sendEmail.pl
+	install -m 644 src/sendEmail/TODO $(STAGING_DIR)/var/sendEmail/TODO
+	install -m 755 -d $(STAGING_DIR)/var/scripts
+	install -m 644 src/scripts/README.md $(STAGING_DIR)/var/scripts/README.md
+	install -m 644 src/scripts/autoProcessMedia.cfg.sample $(STAGING_DIR)/var/scripts/autoProcessMedia.cfg.sample
+	install -m 644 src/scripts/autoProcessMovie.py $(STAGING_DIR)/var/scripts/autoProcessMovie.py
+	install -m 644 src/scripts/autoProcessTV.py $(STAGING_DIR)/var/scripts/autoProcessTV.py
+	install -m 644 src/scripts/changelog.txt $(STAGING_DIR)/var/scripts/changelog.txt
+	install -m 644 src/scripts/nzbToCouchPotato.py $(STAGING_DIR)/var/scripts/nzbToCouchPotato.py
+	install -m 644 src/scripts/nzbToSickBeard.py $(STAGING_DIR)/var/scripts/nzbToSickBeard.py
+	install -m 644 src/scripts/TorrentToMedia.py $(STAGING_DIR)/var/scripts/TorrentToMedia.py
 	install -m 755 src/nzbget-postprocess.sh $(STAGING_DIR)/bin/nzbget-postprocess.sh
 	install -m 644 src/nzbget-postprocess.conf $(STAGING_DIR)/var/nzbget-postprocess.conf
 	install -m 644 src/nzbget-postprocess.conf $(STAGING_DIR)/share/nzbget/webui/nzbget-postprocess.conf

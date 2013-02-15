@@ -48,6 +48,7 @@ nzbget_extra_install:
 	install -m 755 -d $(STAGING_DIR)/var/scripts
 	install -m 644 src/scripts/README.md $(STAGING_DIR)/var/scripts/README.md
 	install -m 644 src/scripts/autoProcessMedia.cfg.sample $(STAGING_DIR)/var/scripts/autoProcessMedia.cfg.sample
+	install -m 644 src/scripts/autoProcessMedia.cfg.sample $(STAGING_DIR)/var/scripts/autoProcessMedia.cfg
 	install -m 644 src/scripts/autoProcessMovie.py $(STAGING_DIR)/var/scripts/autoProcessMovie.py
 	install -m 644 src/scripts/autoProcessTV.py $(STAGING_DIR)/var/scripts/autoProcessTV.py
 	install -m 644 src/scripts/changelog.txt $(STAGING_DIR)/var/scripts/changelog.txt

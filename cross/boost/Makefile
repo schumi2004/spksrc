@@ -5,7 +5,8 @@ PKG_DIR = $(PKG_NAME)_$(subst .,_,$(PKG_VERS))
 PKG_DIST_NAME = $(PKG_DIR).$(PKG_EXT)
 PKG_DIST_SITE = http://sourceforge.net/projects/$(PKG_NAME)/files/$(PKG_NAME)/$(PKG_VERS)
 
-DEPENDS = cross/bzip2 cross/zlib cross/python
+#DEPENDS = cross/bzip2 cross/zlib cross/python
+DEPENDS = cross/bzip2 cross/zlib 
 
 HOMEPAGE = http://www.boost.org/
 COMMENT  = Boost provides free peer-reviewed portable C++ source libraries.
@@ -16,7 +17,8 @@ COMPILE_TARGET = myCompile
 INSTALL_TARGET = myInstall
 
 # Build all if not told otherwise (will most likely fail)
-BOOST_LIBRARIES ?= all
+#BOOST_LIBRARIES ?= all
+BOOST_LIBRARIES ?= date_time filesystem program_options regex serialization system thread iostreams
 
 # Useful variables for subst
 comma:= ,

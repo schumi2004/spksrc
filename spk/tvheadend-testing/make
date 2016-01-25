@@ -1,0 +1,38 @@
+#!/bin/sh
+
+VER=`grep SPK_VERS ./Makefile | sed 's/SPK_VERS = \(.*\)/\1-/'`
+REV=`grep SPK_REV ./Makefile | sed 's/SPK_REV = //'`
+VERSION="$VER$REV"
+
+(
+	rm -f ./build.log
+	make clean
+	make arch-88f6281-5.2 > build.log 2>&1
+	make arch-alpine-5.2 > build.log 2>&1
+	make arch-armada370-5.2 >> build.log 2>&1
+	make arch-armada375-5.2 >> build.log 2>&1
+	make arch-armadaxp-5.2 >> build.log 2>&1
+	make arch-avoton-5.2 >> build.log 2>&1
+	make arch-braswell-5.2 >> build.log 2>&1
+	make arch-bromolow-5.2 >> build.log 2>&1
+	make arch-cedarview-5.2 >> build.log 2>&1
+	make arch-comcerto2k-5.2 >> build.log 2>&1
+	make arch-evansport-5.2 >> build.log 2>&1
+	make arch-monaco-5.2 >> build.log 2>&1
+	make arch-ppc853x-5.2 >> build.log 2>&1
+	make arch-qoriq-5.2 >> build.log 2>&1
+	make arch-x64-5.2 >> build.log 2>&1
+	make arch-x86-5.2 >> build.log 2>&1
+
+	cd /var/www/packages
+
+	tar -czf ./tvheadend-testing_$VERSION.tgz ./*_$VERSION.spk >> /root/spksrc/spk/tvheadend-testing/build.log 2>&1
+
+	FILES=/var/www/packages/*_$VERSION.spk
+        for f in $FILES
+        do
+                curl -F"upload=OK" -F "spk=@$f" http://syno.dierkse.nl/__upload.php >> /root/spksrc/spk/tvheadend-testing/build.log 2>&1
+		rm -f $f >> /root/spksrc/spk/tvheadend-testing/build.log 2>&1
+        done
+) &
+

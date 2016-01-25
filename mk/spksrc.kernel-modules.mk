@@ -72,7 +72,7 @@ kernel_module_compile_target:
 kernel_extract_target:
 	mkdir -p $(KERNEL_DIR)
 	rm -rf $(KERNEL_DIR)
-	tar -xpf $(DIST_FILE) -C $(EXTRACT_PATH) $(PKG_EXTRACT)
+	tar --xz -xpf $(DIST_FILE) -C $(EXTRACT_PATH) $(PKG_EXTRACT)
 	mv $(EXTRACT_PATH)/$(PKG_EXTRACT) $(KERNEL_DIR)
 
 kernel_configure_target: 

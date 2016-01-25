@@ -1,0 +1,68 @@
+diff -Naur configure.orig configure
+--- ./configure.orig    2014-10-23 23:10:00.000000000 +0200
++++ ./configure 2014-10-24 10:16:20.000000000 +0200
+@@ -122,6 +122,11 @@
+ check_cc_snippet getloadavg '#include <stdlib.h>
+ void test() { getloadavg(NULL,0); }'
+
++check_cc_snippet atomic32 '#include <stdint.h>
++int test(int *ptr){
++return __sync_fetch_and_add(ptr, 1);
++}'
++
+ check_cc_snippet atomic64 '#include <stdint.h>
+ uint64_t test(uint64_t *ptr){
+ return __sync_fetch_and_add(ptr, 1);
+--- ./src/atomic.h.orig 2015-12-10 09:31:49.000000000 +0100
++++ ./src/atomic.h      2015-12-10 09:34:28.000000000 +0100
+@@ -30,7 +30,16 @@
+ static inline int
+ atomic_add(volatile int *ptr, int incr)
+ {
++#if ENABLE_ATOMIC32
+   return __sync_fetch_and_add(ptr, incr);
++#else
++  int ret;
++  pthread_mutex_lock(&atomic_lock);
++  ret = *ptr;
++  *ptr += incr;
++  pthread_mutex_unlock(&atomic_lock);
++  return ret;
++#endif
+ }
+
+ static inline uint64_t
+@@ -89,7 +98,16 @@
+ static inline int
+ atomic_dec(volatile int *ptr, int decr)
+ {
++#if ENABLE_ATOMIC32
+   return __sync_fetch_and_sub(ptr, decr);
++#else
++  int ret;
++  pthread_mutex_lock(&atomic_lock);
++  ret = *ptr;
++  *ptr -= decr;
++  pthread_mutex_unlock(&atomic_lock);
++  return ret;
++#endif
+ }
+
+ static inline uint64_t
+@@ -114,7 +132,16 @@
+ static inline int
+ atomic_exchange(volatile int *ptr, int new)
+ {
++#if ENABLE_ATOMIC32
+   return  __sync_lock_test_and_set(ptr, new);
++#else
++  int ret;
++  pthread_mutex_lock(&atomic_lock);
++  ret = *ptr;
++  *ptr = new;
++  pthread_mutex_unlock(&atomic_lock);
++  return ret;
++#endif
+ }
+
+ static inline int

@@ -1,0 +1,35 @@
+--- ./Makefile.orig	2014-04-28 20:14:49.000000000 +0200
++++ ./Makefile	2014-04-28 20:17:54.000000000 +0200
+@@ -1,7 +1,7 @@
+ ARCH ?= ppc853x
+ TCVERSION ?= 5.2
+ PKG_NAME = synogpl
+-PKG_BRANCH = 5565
++PKG_BRANCH = 0000
+ PKG_ARCH = 853x
+ PKG_EXT = tbz
+ PKG_DIST_NAME = $(PKG_NAME)-$(PKG_BRANCH)-$(PKG_ARCH).$(PKG_EXT)
+@@ -11,6 +11,9 @@
+ 
+ HOMEPAGE = http://www.synology.com/
+ 
++PRE_PATCH_TARGET = pre_patch_target_kernel_ppc853x
++POST_PATCH_TARGET = post_patch_target_kernel_ppc853x
++POST_CONFIGURE_TARGET = post_configure_target_kernel_ppc853x
+ PRE_COMPILE_TARGET = kernel_ppc_premake
+ 
+ include ../../mk/spksrc.kernel-modules.mk
+@@ -19,3 +22,13 @@
+ 
+ kernel_ppc_premake:
+ 	$(RUN) $(MAKE) LDFLAGS="" arch/powerpc/lib/crtsavres.o
++
++pre_patch_target_kernel_ppc853x:
++	cp $(KERNEL_DIR)/synoconfigs/ppc8533 $(KERNEL_DIR)/synoconfigs/ppc8533.org
++	cp $(KERNEL_DIR)/synoconfigs/ppc8533 $(KERNEL_DIR)/synoconfigs/ppc853x
++
++post_patch_target_kernel_ppc853x:
++	mv $(KERNEL_DIR)/synoconfigs/ppc853x $(KERNEL_DIR)/synoconfigs/ppc8533
++
++post_configure_target_kernel_ppc853x:
++	mv $(KERNEL_DIR)/synoconfigs/ppc8533.org $(KERNEL_DIR)/synoconfigs/ppc8533

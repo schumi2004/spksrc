@@ -1,0 +1,20 @@
+[{
+    "step_title": "HDHomeRun Driver Configuration",
+    "items": [{
+        "type": "singleselect",
+        "desc": "Select the broadcast standard HDHomeRun should use",
+        "subitems": [{
+            "key": "wizard_hdhomerun_dvbt",
+            "desc": "DVB-T",
+            "defaultValue": true
+        }, {
+            "key": "wizard_hdhomerun_dvbc",
+            "desc": "DVB-C",
+            "defaultValue": false
+        }, {
+            "key": "wizard_hdhomerun_atsc",
+            "desc": "ATSC",
+            "defaultValue": false
+        }]
+    }]
+}]

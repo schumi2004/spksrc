@@ -1,0 +1,11 @@
+--- ./Makefile.orig	2014-03-19 23:01:25.073803457 +0100
++++ ./Makefile	2014-03-19 23:01:32.287719994 +0100
+@@ -1,7 +1,7 @@
+ ARCH ?= evansport
+ TCVERSION ?= 5.2
+ PKG_NAME = synogpl
+-PKG_BRANCH = 5565
++PKG_BRANCH = 0000
+ PKG_ARCH = $(ARCH)
+ PKG_EXT = tbz
+ PKG_DIST_NAME = $(PKG_NAME)-$(PKG_BRANCH)-$(PKG_ARCH).$(PKG_EXT)

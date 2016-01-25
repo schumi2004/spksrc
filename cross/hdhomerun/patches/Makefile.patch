@@ -1,0 +1,11 @@
+--- ./Makefile.orig	2016-01-08 10:59:42.000000000 +0100
++++ ./Makefile	2016-01-08 11:01:09.000000000 +0100
+@@ -14,7 +14,7 @@
+ 
+ install:
+ 	mkdir -p ../install/usr/local/hdhomerun/bin
+-	cp ../../../../kernel/syno-$(ARCH)/work/source/linux/drivers/media/dvb/dvb-core/dvb-core.ko ../install/usr/local/hdhomerun/bin
++	cp ../../../../kernel/syno-$(ARCH)-$(TCVERSION)/work/source/linux/drivers/media/dvb/dvb-core/dvb-core.ko ../install/usr/local/hdhomerun/bin
+ 	cp libhdhomerun/hdhomerun_config ../install/usr/local/hdhomerun/bin
+ 	cp dvbhdhomerun/kernel/dvb_hdhomerun.ko ../install/usr/local/hdhomerun/bin
+ 	cp dvbhdhomerun/kernel/dvb_hdhomerun_core.ko ../install/usr/local/hdhomerun/bin

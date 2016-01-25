@@ -1,5 +1,5 @@
 PKG_NAME = x264
-PKG_VERS = 20140625-2245
+PKG_VERS = 20160106-2245-stable
 PKG_EXT = tar.bz2
 PKG_DIST_NAME = $(PKG_NAME)-snapshot-$(PKG_VERS).$(PKG_EXT)
 PKG_DIST_SITE = ftp://ftp.videolan.org/pub/x264/snapshots/
@@ -18,10 +18,11 @@ ifeq ($(findstring $(ARCH), 88f6281),$(ARCH))
 	ADDITIONAL_CFLAGS = -O0
 endif
 
-ifneq ($(filter $(ARCH), 88f5281 88f6281 alpine armadaxp armada370 armada375 avoton comcerto2k monaco ppc853x ppc854x qoriq x64),)
+ifneq ($(filter $(ARCH), 88f5281 88f6281 alpine armadaxp armada370 armada375 comcerto2k monaco ppc853x ppc854x qoriq x64),)
 	CONFIGURE_ARGS += --disable-asm
 else
 	DEPENDS += native/yasm
+	ENV += AS=yasm
 	ENV += PATH=$(WORK_DIR)/../../../native/yasm/work-native/install/usr/local/bin/:$$PATH
 endif
 

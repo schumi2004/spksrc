@@ -1,0 +1,16 @@
+#!/bin/sh
+
+(
+	rm -f build.log
+	make clean > /dev/null 2>&1
+	make arch-88f6281 > build.log 2>&1
+	make arch-armada370 >> build.log 2>&1
+	make arch-armadaxp >> build.log 2>&1
+	make arch-bromolow >> build.log 2>&1
+	make arch-cedarview >> build.log 2>&1
+	make arch-evansport >> build.log 2>&1
+	make arch-ppc853x >> build.log 2>&1
+	make arch-qoriq >> build.log 2>&1
+	make arch-x86 >> build.log 2>&1
+) &
+

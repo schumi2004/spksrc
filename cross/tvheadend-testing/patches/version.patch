@@ -1,0 +1,11 @@
+--- support/version.orig	2015-06-25 13:39:51.000000000 +0200
++++ support/version		2015-06-25 13:41:27.000000000 +0200
+@@ -23,7 +23,7 @@
+   VER=$(basename $(realpath $(dirname "$0")/..) | sed -e 's/^tvheadend-//' | sed -e 's/^tvheadend-v//')
+   case $VER in
+   [1-9]*\.[0-9]*) ;;
+-  *) VER="0.0.0~unknown" ;;
++  *) VER="4.1.1416" ;;
+   esac
+ fi
+ 

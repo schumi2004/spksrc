@@ -1,0 +1,32 @@
+--- ./Makefile.orig	2014-04-22 10:17:11.000000000 +0200
++++ ./Makefile	2014-04-22 10:23:33.000000000 +0200
+@@ -1,7 +1,7 @@
+ ARCH ?= x86
+ TCVERSION ?= 5.2
+ PKG_NAME = synogpl
+-PKG_BRANCH = 5565
++PKG_BRANCH = 0000
+ PKG_ARCH = x64
+ PKG_EXT = tbz
+ PKG_DIST_NAME = $(PKG_NAME)-$(PKG_BRANCH)-$(PKG_ARCH).$(PKG_EXT)
+@@ -12,4 +12,19 @@
+ 
+ HOMEPAGE = http://www.synology.com/
+ 
++PRE_PATCH_TARGET = pre_patch_target_kernel_x86
++POST_PATCH_TARGET = post_patch_target_kernel_x86
++POST_CONFIGURE_TARGET = post_configure_target_kernel_x86
++
+ include ../../mk/spksrc.kernel-modules.mk
++
++pre_patch_target_kernel_x86:
++	mv $(KERNEL_DIR)/synoconfigs/x86 $(KERNEL_DIR)/synoconfigs/x86.org
++	cp $(KERNEL_DIR)/synoconfigs/x86_64 $(KERNEL_DIR)/synoconfigs/x86_64.org
++	cp $(KERNEL_DIR)/synoconfigs/x86_64 $(KERNEL_DIR)/synoconfigs/x86
++
++post_patch_target_kernel_x86:
++	mv $(KERNEL_DIR)/synoconfigs/x86 $(KERNEL_DIR)/synoconfigs/x86_64
++	mv $(KERNEL_DIR)/synoconfigs/x86.org $(KERNEL_DIR)/synoconfigs/x86
++
++post_configure_target_kernel_x86:
++	mv $(KERNEL_DIR)/synoconfigs/x86_64.org $(KERNEL_DIR)/synoconfigs/x86_64

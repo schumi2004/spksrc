@@ -2,7 +2,7 @@ PKG_NAME = oscam
 PKG_VERS = 1.20
 PKG_EXT = tar.gz
 PKG_DOWNLOAD_METHOD = svn
-PKG_SVN_REV = 7536
+PKG_SVN_REV = 11209
 PKG_DIST_NAME = trunk
 PKG_DIST_SITE = http://www.streamboard.tv/svn/oscam
 PKG_DIST_FILE = $(PKG_NAME)-r$(PKG_SVN_REV).$(PKG_EXT)
@@ -23,7 +23,7 @@ include ../../mk/spksrc.cross-cc.mk
 
 .PHONY: myConfigure
 myConfigure:
-	$(RUN) ./config.sh --enable WITH_SSL --disable HAVE_DVBAPI
+	$(RUN) ./config.sh --enable WITH_SSL --enable HAVE_DVBAPI
 
 .PHONY: myCompile
 myCompile:

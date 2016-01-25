@@ -1,5 +1,5 @@
 SPK_NAME = ffmpeg
-SPK_VERS = 2.1.1
+SPK_VERS = 2.8.4
 SPK_REV = 1
 SPK_ICON = src/ffmpeg.png
 DSM_UI_DIR = app

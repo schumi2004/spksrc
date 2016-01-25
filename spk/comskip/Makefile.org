@@ -1,0 +1,25 @@
+SPK_NAME = comskip
+SPK_VERS = 0.89.090
+SPK_REV = 1
+SPK_ICON = src/comskip.png
+DSM_UI_DIR = app
+
+DEPENDS = cross/$(SPK_NAME)
+
+MAINTAINER = SynoCommunity
+DESCRIPTION = 
+DISPLAY_NAME = ComSkip
+CHANGELOG = ""
+
+HOMEPAGE = http://www.kaashoek.com/comskip
+LICENSE  =
+
+WIZARDS_DIR = src/wizard/
+
+INSTALLER_SCRIPT = src/installer.sh
+SSS_SCRIPT       = src/dsm-control.sh
+ADDITIONAL_SCRIPTS =
+
+INSTALL_PREFIX = /usr/local/$(SPK_NAME)
+
+include ../../mk/spksrc.spk.mk

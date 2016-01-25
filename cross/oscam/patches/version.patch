@@ -1,0 +1,23 @@
+--- Makefile
++++ Makefile
+@@ -5,7 +5,8 @@ SHELL = /bin/sh
+ .PHONY: all tests help README.build README.config simple default debug config menuconfig allyesconfig allnoconfig defconfig clean distclean
+ 
+ VER     := $(shell ./config.sh --oscam-version)
+-SVN_REV := $(shell ./config.sh --oscam-revision)
++SVN_REV := 11209
++CS_SVN_VERSION := 11209
+ 
+ uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
+ 
+--- Makefile.orig
++++ Makefile.orig
+@@ -5,7 +5,8 @@ SHELL = /bin/sh
+ .PHONY: all tests help README.build README.config simple default debug config menuconfig allyesconfig allnoconfig defconfig clean distclean
+ 
+ VER     := $(shell ./config.sh --oscam-version)
+-SVN_REV := $(shell ./config.sh --oscam-revision)
++SVN_REV := 11209
++CS_SVN_VERSION := 11209
+ 
+ uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')

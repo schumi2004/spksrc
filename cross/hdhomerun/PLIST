@@ -1,0 +1,7 @@
+rsc:bin/dvb-core.ko
+rsc:bin/dvb_hdhomerun.ko
+rsc:bin/dvb_hdhomerun_core.ko
+rsc:bin/dvb_hdhomerun_fe.ko
+bin:bin/hdhomerun_config
+bin:bin/userhdhomerun
+lib:lib/libhdhomerun.so

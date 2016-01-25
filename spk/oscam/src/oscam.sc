@@ -2,5 +2,5 @@
 title="OSCam"
 desc="OSCam"
 port_forward="yes"
-dst.ports="83/tcp"
+dst.ports="19080/tcp"
 

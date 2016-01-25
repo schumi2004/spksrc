@@ -1,0 +1,10 @@
+--- ./crypto/perlasm/x86_64-xlate.pl.orig	2016-01-07 21:08:16.000000000 +0100
++++ ./crypto/perlasm/x86_64-xlate.pl	2016-01-07 21:08:39.000000000 +0100
+@@ -195,6 +195,7 @@
+     sub out {
+     	my $self = shift;
+ 
++        use bigint;
+ 	if ($gas) {
+ 	    # Solaris /usr/ccs/bin/as can't handle multiplications
+ 	    # in $self->{value}

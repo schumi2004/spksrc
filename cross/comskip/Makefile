@@ -15,7 +15,7 @@ LICENSE  = GNU/LGPL
 
 PRE_CONFIGURE_TARGET = myPreConfigure
 GNU_CONFIGURE = 1
-ADDITIONAL_LDFLAGS="-Wl,-rpath,/usr/local/ffmpeg/lib/"
+#ADDITIONAL_LDFLAGS="-Wl,-rpath,/usr/local/ffmpeg/lib/"
 
 include ../../mk/spksrc.cross-cc.mk
 

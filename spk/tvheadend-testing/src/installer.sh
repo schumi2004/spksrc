@@ -29,6 +29,10 @@ postinst ()
     # Create user
     adduser -h ${INSTALL_DIR}/var -g "${DNAME} User" -G ${GROUP} -s /bin/sh -S -D ${USER}
 
+    # Put comskip in PATH
+    mkdir -p /usr/local/bin
+    ln -s ${INSTALL_DIR}/bin/comskip /usr/local/bin/comskip
+
     # Edit the configuration according to the wizard
     sed -i -e "s/@username@/${wizard_username:=admin}/g" ${INSTALL_DIR}/var/accesscontrol/1
     sed -i -e "s/@password@/${wizard_password:=admin}/g" ${INSTALL_DIR}/var/accesscontrol/1
@@ -57,6 +61,9 @@ postuninst ()
 {
     # Remove link
     rm -f ${INSTALL_DIR}
+
+    # Remove comskip symlink
+    rm -f /usr/local/bin/comskip
 
     exit 0
 }

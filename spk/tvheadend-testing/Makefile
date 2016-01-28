@@ -1,5 +1,5 @@
 SPK_NAME = tvheadend-testing
-SPK_VERS = 4.1.1416
+SPK_VERS = 4.1.1434
 SPK_REV = 1
 SPK_ICON = src/tvheadend-testing.png
 DSM_UI_DIR = app
@@ -12,7 +12,7 @@ DESCRIPTION_FRE = Tvheadend est un serveur de streaming pour linux gérant les s
 ADMIN_PORT = 9981
 RELOAD_UI = yes
 DISPLAY_NAME = Tvheadend-Testing
-CHANGELOG = "Update to 4.1.1416"
+CHANGELOG = "Update to 4.1.1434 + comskip 0.81.090"
 
 HOMEPAGE = https://www.lonelycoder.com/tvheadend/
 LICENSE  =
@@ -43,6 +43,7 @@ tvheadend_extra_install:
 	install -m 700 src/accesscontrol.json $(STAGING_DIR)/var/accesscontrol/1
 	install -m 644 src/comskip.ini $(STAGING_DIR)/var/comskip.ini
 	install -m 644 src/comskip.dictionary $(STAGING_DIR)/var/comskip.dictionary
+	install -m 755 src/tvheadend-pp.sh $(STAGING_DIR)/var/tvheadend-pp.sh
 	install -m 755 -d $(STAGING_DIR)/app/images
 	for size in 16 24 32 48 72 ; \
 	do \

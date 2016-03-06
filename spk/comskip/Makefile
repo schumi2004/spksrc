@@ -1,5 +1,5 @@
 SPK_NAME = comskip
-SPK_VERS = 0.81.090
+SPK_VERS = 0.81.091
 SPK_REV = 1
 SPK_ICON = src/comskip.png
 BETA = 1
@@ -11,7 +11,7 @@ STARTABLE = no
 MAINTAINER = SynoCommunity
 DESCRIPTION = Comskip is a free mpeg commercial detector. Read the wiki on how to use and configure it.
 DISPLAY_NAME = Comskip
-CHANGELOG = "Updated to version 0.81.090"
+CHANGELOG = "Updated to version 0.81.091"
 
 HOMEPAGE = http://www.kaashoek.com/comskip/
 LICENSE = GNU/LGPL

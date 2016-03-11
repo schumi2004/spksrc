@@ -15,7 +15,7 @@ COMMENT  = Tvheadend is a TV streaming server for Linux supporting DVB-S, DVB-S2
 LICENSE  =
 
 GNU_CONFIGURE = 1
-CONFIGURE_ARGS = --enable-bundle --enable-imagecache --enable-uriparser --enable-libav --enable-dvbcsa --disable-avahi --enable-hdhomerun_static --release --disable-libffmpeg_static
+CONFIGURE_ARGS = --enable-bundle --enable-imagecache --enable-uriparser --enable-libav --enable-dvbcsa --disable-avahi --enable-hdhomerun_static --release --disable-libffmpeg_static --nowerror
 INSTALL_TARGET = myInstall
 
 POST_EXTRACT_TARGET = post_extract_target_tvheadend-testing

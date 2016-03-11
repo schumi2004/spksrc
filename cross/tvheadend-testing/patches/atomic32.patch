@@ -51,15 +51,15 @@ diff -Naur configure.orig configure
  static inline uint64_t
 @@ -114,7 +132,16 @@
  static inline int
- atomic_exchange(volatile int *ptr, int new)
+ atomic_exchange(volatile int *ptr, int val)
  {
 +#if ENABLE_ATOMIC32
-   return  __sync_lock_test_and_set(ptr, new);
+   return  __sync_lock_test_and_set(ptr, val);
 +#else
 +  int ret;
 +  pthread_mutex_lock(&atomic_lock);
 +  ret = *ptr;
-+  *ptr = new;
++  *ptr = val;
 +  pthread_mutex_unlock(&atomic_lock);
 +  return ret;
 +#endif

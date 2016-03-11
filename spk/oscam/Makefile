@@ -1,5 +1,5 @@
 SPK_NAME = oscam
-SPK_VERS = 1.20-r11211
+SPK_VERS = 1.20-r11212
 SPK_REV = 1
 SPK_ICON = src/oscam.png
 DSM_UI_DIR = app
@@ -11,6 +11,7 @@ DESCRIPTION = OSCam is a multi-protocol and cross-platform card server. A card s
 ADMIN_PORT = 19080
 RELOAD_UI = yes
 DISPLAY_NAME = OSCam
+CHANGELOG = "Updated to revision 1.20-r11212"
 
 HOMEPAGE = https://www.oscam.to/
 LICENSE  =

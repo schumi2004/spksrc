@@ -1,9 +1,10 @@
 PKG_NAME = nzbget
-PKG_VERS = 16.0
-PKG_REV = 1439
+PKG_VERS = 17.0~r1645
 PKG_EXT = tar.gz
-PKG_DIST_SITE = https://github.com/$(PKG_NAME)/$(PKG_NAME)/releases/download/v$(PKG_VERS)-r$(PKG_REV)
-PKG_DIST_NAME = $(PKG_NAME)-$(PKG_VERS)-testing-r$(PKG_REV)-src.$(PKG_EXT)
+PKG_DOWNLOAD_METHOD = git
+PKG_GIT_HASH = e3cce71
+PKG_DIST_SITE = https://github.com/nzbget/nzbget.git
+PKG_DIST_FILE = $(PKG_NAME)-git$(PKG_GIT_HASH).$(PKG_EXT)
 PKG_DIR = $(PKG_NAME)-$(PKG_VERS)-testing
 
 DEPENDS = cross/libxml2 cross/ncurses cross/openssl

@@ -5,7 +5,7 @@ PKG_DOWNLOAD_METHOD = git
 PKG_GIT_HASH = e3cce71
 PKG_DIST_SITE = https://github.com/nzbget/nzbget.git
 PKG_DIST_FILE = $(PKG_NAME)-git$(PKG_GIT_HASH).$(PKG_EXT)
-PKG_DIR = $(PKG_NAME)-$(PKG_VERS)-testing
+PKG_DIR = $(PKG_NAME)-git$(PKG_GIT_HASH)
 
 DEPENDS = cross/libxml2 cross/ncurses cross/openssl
 

@@ -18,14 +18,14 @@ fi
 
 start_daemon ()
 {
-    ${TVHEADEND} -f -u ${USER} -c ${INSTALL_DIR}/var -p ${PID_FILE} -l ${LOG_FILE}
+    ${TVHEADEND} -f -u ${USER} -c ${INSTALL_DIR}/var -p ${PID_FILE} -l ${LOG_FILE} --debug "" -S
 }
 
 stop_daemon ()
 {
-    ps | grep "${TVHEADEND}" | awk '{print $1}' | xargs kill
+    ps -eo pid,cmd | grep "${TVHEADEND}" | awk '{print $1}' | xargs kill
     sleep 2
-    ps | grep "${TVHEADEND}" | awk '{print $1}' | xargs kill -9
+    ps -eo pid,cmd | grep "${TVHEADEND}" | awk '{print $1}' | xargs kill -9
     rm -f ${PID_FILE}
 }
 

@@ -4,7 +4,7 @@ SPK_REV = 12
 SPK_ICON = src/nzbget-testing.png
 DSM_UI_DIR = app
 
-DEPENDS = cross/busybox cross/unrar cross/p7zip cross/$(SPK_NAME)
+DEPENDS = cross/busybox cross/p7zip cross/unrar cross/$(SPK_NAME)
 
 MAINTAINER = Diaoul
 DESCRIPTION = NZBGet is a command-line based binary newsgrabber for nzb files, written in C++. It supports client/server mode, automatic par-check/-repair, unpack and web-interface. NZBGet requires low system resources.

@@ -1,0 +1,553 @@
+From 7048ab6d61ce3bfeb3104ce68b61cff25075471d Mon Sep 17 00:00:00 2001
+From: Adrien Chevrier <adrien.chevrier@sogeti.com>
+Date: Fri, 15 Apr 2016 09:17:47 +0200
+Subject: [PATCH] feat: add NZBHydra package
+
+---
+ spk/nzbhydra/Makefile           |  48 +++++++++++++++++++++
+ spk/nzbhydra/PLIST              |   0
+ spk/nzbhydra/src/app/config     |  15 +++++++
+ spk/nzbhydra/src/dsm-control.sh |  87 +++++++++++++++++++++++++++++++++++++
+ spk/nzbhydra/src/installer.sh   |  92 ++++++++++++++++++++++++++++++++++++++++
+ spk/nzbhydra/src/nzbhydra.png   | Bin 0 -> 13485 bytes
+ spk/nzbhydra/src/nzbhydra.sc    |   6 +++
+ 7 files changed, 248 insertions(+)
+ create mode 100644 spk/nzbhydra/Makefile
+ create mode 100644 spk/nzbhydra/PLIST
+ create mode 100644 spk/nzbhydra/src/app/config
+ create mode 100644 spk/nzbhydra/src/dsm-control.sh
+ create mode 100644 spk/nzbhydra/src/installer.sh
+ create mode 100644 spk/nzbhydra/src/nzbhydra.png
+ create mode 100644 spk/nzbhydra/src/nzbhydra.sc
+
+diff --git a/spk/nzbhydra/Makefile b/spk/nzbhydra/Makefile
+new file mode 100644
+index 0000000..2b82388
+--- /dev/null
++++ b/spk/nzbhydra/Makefile
+@@ -0,0 +1,48 @@
++SPK_NAME = nzbhydra
++SPK_VERS = 0.0.1a88
++SPK_REV = 1
++SPK_ICON = src/nzbhydra.png
++DSM_UI_DIR = app
++
++DEPENDS  = 
++SPK_DEPENDS = "python>2.7.9:git"
++
++MAINTAINER = adchevrier
++DESCRIPTION = NZBHydra is a meta search for NZB indexers and the \"spiritual successor\" to NZBmegasearcH. It provides easy access to a number of raw and newznab based indexers.
++ADMIN_PORT = 5075
++RELOAD_UI = yes
++DISPLAY_NAME = NZBHydra
++BETA = 1
++CHANGELOG = "First release"
++
++HOMEPAGE   = https://github.com/theotherp/nzbhydra
++LICENSE    = ApacheV2
++
++INSTALLER_SCRIPT = src/installer.sh
++SSS_SCRIPT       = src/dsm-control.sh
++FWPORTS          = src/${SPK_NAME}.sc
++
++INSTALL_PREFIX = /usr/local/$(SPK_NAME)
++
++COPY_TARGET = nop
++POST_STRIP_TARGET = nzbhydra_extra_install
++
++# Pure Python package, make sure ARCH is not defined
++override ARCH=
++
++include ../../mk/spksrc.spk.mk
++
++.PHONY: nzbhydra_extra_install
++nzbhydra_extra_install: $(STAGING_DIR)/share/NZBHydra
++	install -m 755 -d $(STAGING_DIR)/var
++	install -m 755 -d $(STAGING_DIR)/app
++	install -m 644 src/app/config $(STAGING_DIR)/app/config
++	install -m 755 -d $(STAGING_DIR)/app/images
++	for size in 16 24 32 48 72; do \
++		convert $(SPK_ICON) -thumbnail $${size}x$${size} \
++		        $(STAGING_DIR)/app/images/$(SPK_NAME)-$${size}.png ; \
++	done
++
++$(STAGING_DIR)/share/NZBHydra:
++	install -m 755 -d $(STAGING_DIR)/share
++	cd $(STAGING_DIR)/share && git clone https://github.com/theotherp/nzbhydra.git && cd nzbhydra && git checkout d40fafa6d204db3820ac242ea4bbaeb05f4a04da
+diff --git a/spk/nzbhydra/PLIST b/spk/nzbhydra/PLIST
+new file mode 100644
+index 0000000..e69de29
+diff --git a/spk/nzbhydra/src/app/config b/spk/nzbhydra/src/app/config
+new file mode 100644
+index 0000000..70f7f22
+--- /dev/null
++++ b/spk/nzbhydra/src/app/config
+@@ -0,0 +1,15 @@
++{
++    ".url": {
++        "com.synocommunity.packages.nzbhydra": {
++            "title": "NZBHydra",
++            "desc": "NZBHydra",
++            "icon": "images/nzbhydra-{0}.png",
++            "type": "url",
++            "protocol": "http",
++            "port": "5075",
++            "url": "/",
++            "allUsers": true,
++            "grantPrivilege": "local"
++        }
++    }
++}
+diff --git a/spk/nzbhydra/src/dsm-control.sh b/spk/nzbhydra/src/dsm-control.sh
+new file mode 100644
+index 0000000..2822f00
+--- /dev/null
++++ b/spk/nzbhydra/src/dsm-control.sh
+@@ -0,0 +1,87 @@
++#!/bin/sh
++
++# Package
++PACKAGE="nzbhydra"
++DNAME="NZBHydra"
++
++# Others
++INSTALL_DIR="/usr/local/${PACKAGE}"
++PYTHON_DIR="/usr/local/python"
++GIT_DIR="/usr/local/git"
++PATH="${INSTALL_DIR}/bin:${INSTALL_DIR}/env/bin:${PYTHON_DIR}/bin:${GIT_DIR}/bin:${PATH}"
++USER="nzbhydra"
++PYTHON="${INSTALL_DIR}/env/bin/python"
++NZBHYDRA="${INSTALL_DIR}/share/nzbhydra/nzbhydra.py"
++PID_FILE="${INSTALL_DIR}/var/nzbhydra.pid"
++LOG_FILE="${INSTALL_DIR}/var/nzbhydra.log"
++DB_FILE="${INSTALL_DIR}/var/nzbhydra.db"
++CONF_FILE="${INSTALL_DIR}/var/settings.cfg"
++
++
++start_daemon ()
++{
++    su ${USER} -c "PATH=${PATH} ${PYTHON} ${NZBHYDRA} --daemon --nobrowser --database ${DB_FILE} --config ${CONF_FILE} --logfile ${LOG_FILE} --pidfile ${PID_FILE} "
++}
++
++stop_daemon ()
++{
++    kill `cat ${PID_FILE}`
++    wait_for_status 1 20 || kill -9 `cat ${PID_FILE}`
++    rm -f ${PID_FILE}
++}
++
++daemon_status ()
++{
++    if [ -f ${PID_FILE} ] && kill -0 `cat ${PID_FILE}` > /dev/null 2>&1; then
++        return
++    fi
++    rm -f ${PID_FILE}
++    return 1
++}
++
++wait_for_status ()
++{
++    counter=$2
++    while [ ${counter} -gt 0 ]; do
++        daemon_status
++        [ $? -eq $1 ] && return
++        let counter=counter-1
++        sleep 1
++    done
++    return 1
++}
++
++
++case $1 in
++    start)
++        if daemon_status; then
++            echo ${DNAME} is already running
++        else
++            echo Starting ${DNAME} ...
++            start_daemon
++        fi
++        ;;
++    stop)
++        if daemon_status; then
++            echo Stopping ${DNAME} ...
++            stop_daemon
++        else
++            echo ${DNAME} is not running
++        fi
++        ;;
++    status)
++        if daemon_status; then
++            echo ${DNAME} is running
++            exit 0
++        else
++            echo ${DNAME} is not running
++            exit 1
++        fi
++        ;;
++    log)
++        echo ${LOG_FILE}
++        ;;
++    *)
++        exit 1
++        ;;
++esac
+diff --git a/spk/nzbhydra/src/installer.sh b/spk/nzbhydra/src/installer.sh
+new file mode 100644
+index 0000000..64a6f73
+--- /dev/null
++++ b/spk/nzbhydra/src/installer.sh
+@@ -0,0 +1,92 @@
++#!/bin/sh
++
++# Package
++PACKAGE="nzbhydra"
++DNAME="NZBHydra"
++
++# Others
++INSTALL_DIR="/usr/local/${PACKAGE}"
++SSS="/var/packages/${PACKAGE}/scripts/start-stop-status"
++PYTHON_DIR="/usr/local/python"
++PATH="${INSTALL_DIR}/bin:${INSTALL_DIR}/env/bin:${PYTHON_DIR}/bin:${PATH}"
++USER="nzbhydra"
++GROUP="users"
++VIRTUALENV="${PYTHON_DIR}/bin/virtualenv"
++TMP_DIR="${SYNOPKG_PKGDEST}/../../@tmp"
++
++SERVICETOOL="/usr/syno/bin/servicetool"
++FWPORTS="/var/packages/${PACKAGE}/scripts/${PACKAGE}.sc"
++
++preinst ()
++{
++    exit 0
++}
++
++postinst ()
++{
++    # Link
++    ln -s ${SYNOPKG_PKGDEST} ${INSTALL_DIR}
++
++    # Create a Python virtualenv
++    ${VIRTUALENV} --system-site-packages ${INSTALL_DIR}/env > /dev/null
++
++    # Create user
++    adduser -h ${INSTALL_DIR}/var -g "${DNAME} User" -G ${GROUP} -s /bin/sh -S -D ${USER}
++
++    # Correct the files ownership
++    chown -R ${USER}:root ${SYNOPKG_PKGDEST}
++
++    # Add firewall config
++    ${SERVICETOOL} --install-configure-file --package ${FWPORTS} >> /dev/null
++
++    exit 0
++}
++
++preuninst ()
++{
++    # Stop the package
++    ${SSS} stop > /dev/null
++
++    # Remove the user (if not upgrading)
++    if [ "${SYNOPKG_PKG_STATUS}" != "UPGRADE" ]; then
++        delgroup ${USER} ${GROUP}
++        deluser ${USER}
++    fi
++
++    # Remove firewall config
++    if [ "${SYNOPKG_PKG_STATUS}" == "UNINSTALL" ]; then
++        ${SERVICETOOL} --remove-configure-file --package ${PACKAGE}.sc >> /dev/null
++    fi
++
++    exit 0
++}
++
++postuninst ()
++{
++    # Remove link
++    rm -f ${INSTALL_DIR}
++
++    exit 0
++}
++
++preupgrade ()
++{
++    # Stop the package
++    ${SSS} stop > /dev/null
++
++    # Save some stuff
++    rm -fr ${TMP_DIR}/${PACKAGE}
++    mkdir -p ${TMP_DIR}/${PACKAGE}
++    mv ${INSTALL_DIR}/var ${TMP_DIR}/${PACKAGE}
++
++    exit 0
++}
++
++postupgrade ()
++{
++    # Restore some stuff
++    mv ${TMP_DIR}/${PACKAGE}/var ${INSTALL_DIR}
++    rm -fr ${TMP_DIR}/${PACKAGE}
++
++    exit 0
++}
+diff --git a/spk/nzbhydra/src/nzbhydra.png b/spk/nzbhydra/src/nzbhydra.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..95a8c460ad7efa806d3381ae3d8b1d86ab8c129c
+GIT binary patch
+literal 13485
+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
+bUBDZsVa~KiUqcY5i2yliWvL1Yli>dYnYVUZ
+
+literal 0
+HcmV?d00001
+
+diff --git a/spk/nzbhydra/src/nzbhydra.sc b/spk/nzbhydra/src/nzbhydra.sc
+new file mode 100644
+index 0000000..c4318a8
+--- /dev/null
++++ b/spk/nzbhydra/src/nzbhydra.sc
+@@ -0,0 +1,6 @@
++[nzbhydra]
++title="NZBHydra"
++desc="NZBHydra"
++port_forward="yes"
++dst.ports="5075/tcp"
++

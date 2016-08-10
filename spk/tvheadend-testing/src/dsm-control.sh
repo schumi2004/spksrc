@@ -8,7 +8,9 @@ DNAME="Tvheadend-testing"
 INSTALL_DIR="/usr/local/${PACKAGE}"
 PATH="${INSTALL_DIR}/bin:/usr/local/bin:/bin:/usr/bin:/usr/syno/bin"
 USER="tvheadend-testing"
-TVHEADEND="${INSTALL_DIR}/bin/tvheadend"
+GROUP="users"
+BINARY="tvheadend"
+TVHEADEND="${INSTALL_DIR}/bin/${BINARY}"
 PID_FILE="${INSTALL_DIR}/var/tvheadend.pid"
 LOG_FILE="${INSTALL_DIR}/var/tvheadend.log"
 
@@ -18,14 +20,14 @@ fi
 
 start_daemon ()
 {
-    ${TVHEADEND} -f -u ${USER} -c ${INSTALL_DIR}/var -p ${PID_FILE} -l ${LOG_FILE} --debug "" -S
+    ${TVHEADEND} -f -u ${USER} -g ${GROUP} -c ${INSTALL_DIR}/var -p ${PID_FILE}
 }
 
 stop_daemon ()
 {
-    ps -eo pid,cmd | grep "${TVHEADEND}" | awk '{print $1}' | xargs kill
+    pidof "${BINARY}" | xargs kill
     sleep 2
-    ps -eo pid,cmd | grep "${TVHEADEND}" | awk '{print $1}' | xargs kill -9
+    pidof "${BINARY}" | xargs kill -9
     rm -f ${PID_FILE}
 }
 

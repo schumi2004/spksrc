@@ -1,14 +1,14 @@
 PKG_NAME = tvheadend-testing
-PKG_VERS = 4.1.1870
+PKG_VERS = 4.1.2132
 PKG_EXT = tar.gz
 PKG_DOWNLOAD_METHOD = git
-PKG_GIT_HASH = 1cc14cd
+PKG_GIT_HASH = f34fac1
 PKG_DIST_NAME = tvheadend.git
 PKG_DIST_SITE = https://github.com/tvheadend
 PKG_DIST_FILE = $(PKG_NAME)-git$(PKG_GIT_HASH).$(PKG_EXT)
 PKG_DIR = $(PKG_NAME)-git*
 
-DEPENDS = cross/openssl cross/curl cross/uriparser cross/ffmpeg-3.0 cross/libdvbcsa cross/comskip
+DEPENDS = cross/openssl cross/curl cross/uriparser cross/ffmpeg-3.1 cross/libdvbcsa cross/comskip
 
 HOMEPAGE = https://www.lonelycoder.com/tvheadend/
 COMMENT  = Tvheadend is a TV streaming server for Linux supporting DVB-S, DVB-S2, DVB-C, DVB-T, ATSC, IPTV, and Analog video (V4L) as input sources

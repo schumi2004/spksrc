@@ -2,12 +2,12 @@ TC_NAME = syno-alpine
 
 TC_ARCH = alpine
 TC_VERS = 6.0
-TC_FIRMWARE = 5.1-5004
+TC_FIRMWARE = 6.0-7321
 
 TC_DIST_NAME = alpine-gcc493_glibc220_hard-GPL.txz
 
 TC_EXT = txz
-TC_DIST_SITE = http://sourceforge.net/projects/dsgpl/files/DSM%206.0%20Beta2%20Tool%20Chains/Annapurna%20Alpine%20Linux%203.10.77
+TC_DIST_SITE = http://sourceforge.net/projects/dsgpl/files/DSM%206.0%20Tool%20Chains/Annapurna%20Alpine%20Linux%203.10.77
 
 TC_BASE_DIR = arm-unknown-linux-gnueabi
 TC_PREFIX = arm-unknown-linux-gnueabi

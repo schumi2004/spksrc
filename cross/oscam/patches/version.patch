@@ -5,8 +5,8 @@
  
  VER     := $(shell ./config.sh --oscam-version)
 -SVN_REV := $(shell ./config.sh --oscam-revision)
-+SVN_REV := 11213
-+CS_SVN_VERSION := 11226
++SVN_REV := 11270
++CS_SVN_VERSION := 11270
  
  uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')
  
@@ -17,7 +17,7 @@
  
  VER     := $(shell ./config.sh --oscam-version)
 -SVN_REV := $(shell ./config.sh --oscam-revision)
-+SVN_REV := 11213
-+CS_SVN_VERSION := 11226
++SVN_REV := 11270
++CS_SVN_VERSION := 11270
  
  uname_S := $(shell sh -c 'uname -s 2>/dev/null || echo not')

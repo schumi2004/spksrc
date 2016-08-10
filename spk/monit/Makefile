@@ -1,9 +1,9 @@
 SPK_NAME = monit
-SPK_VERS = 5.17
-SPK_REV = 7
+SPK_VERS = 5.19
+SPK_REV = 9
 SPK_ICON = src/monit.png
 DSM_UI_DIR = app
-CHANGELOG = Update monit to 5.17
+CHANGELOG = Update monit to 5.19
 ADMIN_PORT = 2812
 BETA = 1
 

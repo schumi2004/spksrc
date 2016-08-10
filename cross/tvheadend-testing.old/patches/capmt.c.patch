@@ -1,0 +1,13 @@
+--- ./src/descrambler/capmt.c.orig	2015-12-09 11:15:17.000000000 +0100
++++ ./src/descrambler/capmt.c	2015-12-10 11:17:30.000000000 +0100
+@@ -694,8 +694,9 @@
+       TAILQ_REMOVE(&capmt->capmt_writeq, msg2, cm_link);
+       TAILQ_INSERT_HEAD(&capmt->capmt_writeq, msg2, cm_link);
+     }
+-  } else
++  } else {
+     TAILQ_INSERT_TAIL(&capmt->capmt_writeq, msg, cm_link);
++  }
+   tvh_write(capmt->capmt_pipe.wr, "c", 1);
+ }
+ 

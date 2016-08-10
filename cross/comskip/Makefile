@@ -7,7 +7,7 @@ PKG_DIST_SITE = https://github.com/erikkaashoek/Comskip.git
 PKG_DIST_FILE = $(PKG_NAME)-git$(PKG_GIT_HASH).$(PKG_EXT)
 PKG_DIR = $(PKG_NAME)-git$(PKG_GIT_HASH)
 
-DEPENDS = cross/ffmpeg-3.0 cross/argtable
+DEPENDS = cross/ffmpeg-3.1 cross/argtable
 
 HOMEPAGE = http://www.kaashoek.com/comskip
 COMMENT  = Commercial detector

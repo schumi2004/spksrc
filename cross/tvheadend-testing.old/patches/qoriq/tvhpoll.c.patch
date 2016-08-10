@@ -1,0 +1,11 @@
+--- ./src/tvhpoll.c.orig	2014-12-07 10:49:06.000000000 +0100
++++ ./src/tvhpoll.c	2014-12-07 10:49:55.000000000 +0100
+@@ -70,7 +70,7 @@
+ {
+   int fd;
+ #if ENABLE_EPOLL
+-  if ((fd = epoll_create1(EPOLL_CLOEXEC)) < 0) {
++  if ((fd = epoll_create(1)) < 0) {
+     tvhlog(LOG_ERR, "tvhpoll", "failed to create epoll [%s]",
+            strerror(errno));
+     return NULL;

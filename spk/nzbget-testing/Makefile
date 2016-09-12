@@ -1,5 +1,5 @@
 SPK_NAME = nzbget-testing
-SPK_VERS = 17.1~r1759
+SPK_VERS = 17.1~r1761
 SPK_REV = 12
 SPK_ICON = src/nzbget-testing.png
 DSM_UI_DIR = app
@@ -13,7 +13,7 @@ DESCRIPTION_SPN = NZBGet es una aplicación de linea de comandos escrita en C++ 
 RELOAD_UI = yes
 ADMIN_PORT = 9876
 DISPLAY_NAME = NZBGet Testing
-CHANGELOG = "Update NZBGet to 17.1~r1759"
+CHANGELOG = "Update NZBGet to 17.1~r1761"
 BETA = 1
 
 HOMEPAGE = http://nzbget.net
